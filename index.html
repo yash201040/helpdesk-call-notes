@@ -1,0 +1,358 @@
+
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <link rel="stylesheet" href="./call-notes-log.css">
+        <title>SSSIHMS-AIT Call Notes</title>
+        <script src="./autocomplete.js"></script> 
+        <script>
+            var cacheVariable = 0; 
+            var language = '';
+            var FROM1 = "none";
+            var FROM2 = "none";
+            var patientName = '';
+            var age = '';
+            var gender = "none";
+            var attender = '';
+            var relation = '';
+            var hospitalID = '';
+            var SHDID = '';
+            var place = '';
+            var phoneNumber = '';
+            var emailID = '';
+            var department = '';
+            var information = '';
+            var response = '';
+            var resolution = '';
+
+            // window.confirm('If you exit now, data on this page would be deleted.'+'\n'+'Do you want to leave?');
+            function createCallNotes() {
+                document.getElementById('callNotes').innerHTML= '';
+                var callNotes = document.getElementById('callNotes');
+                let language = document.getElementById('language').value;
+                let FROM1 = document.getElementById("FROM1").value;
+                let FROM2 = document.getElementById("FROM2").value;
+                let patientName = document.getElementById('patientName').value;
+                let age = document.getElementById('age').value;
+                let gender = document.getElementById('gender').value;
+                let attender = document.getElementById('attender').value;
+                let relation = document.getElementById('relation').value;
+                let hospitalID = document.getElementById('hospitalID').value;
+                let SHDID = document.getElementById('SHDID').value;
+                let place = document.getElementById('place').value;
+                let phoneNumber = document.getElementById('phoneNumber').value;
+                let emailID = document.getElementById('emailID').value;
+                let department = document.getElementById('department').value;
+                let information = document.getElementById('information').value;
+                let response = document.getElementById('response').value;
+                let resolution = document.getElementById('resolution').value;
+
+                if (language != '') {
+                    callNotes.innerHTML += 'LANGUAGE: ' + language + ';    ';    
+                };
+                if (FROM1 != "none" && FROM2 != "none") {
+                    callNotes.innerHTML += 'FROM: ' + FROM2 +"-" + FROM1 + ';  ';
+                };
+                if (patientName.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'PATIENT NAME: ' + patientName + ';    ';
+                };
+                if (age.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'AGE: ' + age + ';    ';
+                };
+                if (gender != "none") {
+                    callNotes.innerHTML += 'GENDER: ' + gender + '; ';
+                };
+                if (attender.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'ATTENDANT NAME: ' + attender + ';   ';
+                };
+                if (relation.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'RELATION: ' + relation + ';   ';
+                };
+                if (hospitalID.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'HOSPITAL ID: ' + hospitalID + '; ';
+                };
+                if (SHDID.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'SHDID: ' + SHDID + ';  ';
+                };
+                if (place.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'PLACE: ' + place + ';  ';
+                };
+                if (phoneNumber.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'PHONE: ' + phoneNumber + ';    ';
+                };
+                if (emailID.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'EMAIL ID: ' + emailID + ';    ';
+                };
+                if (department.localeCompare('') != 0) {
+                    callNotes.innerHTML += 'DEPARTMENT: ' + department + '; ';
+                };
+                if (information != '') {
+                    callNotes.innerHTML += 'INFORMATION: ' + information + ';    ';
+                };
+                if (response != '') {
+                    callNotes.innerHTML += 'RESPONSE: ' + response + ';   ';
+                };
+                if (resolution != '') {
+                    callNotes.innerHTML += 'RESOLUTION: ' + resolution + '; ';
+                };
+
+            };
+            
+            function update(elementID, variable) {
+                variable = document.getElementById(elementID).value;
+            };
+
+            function copyNotes() {
+                let callNotes = document.getElementById('callNotes');
+                callNotes.select();
+                document.execCommand('copy');
+                document.getElementById('callNotes').blur();
+            };
+
+            function clearEntries() {
+                document.getElementById('language').value = '';
+                document.getElementById("FROM1").value = "none";
+                document.getElementById("FROM2").value = "none";
+                document.getElementById('patientName').value = '';
+                document.getElementById('age').value = '';
+                document.getElementById('gender').value = "none";
+                document.getElementById('attender').value = '';
+                document.getElementById('relation').value = '';
+                document.getElementById('hospitalID').value = '';
+                document.getElementById('SHDID').value = '';
+                document.getElementById('place').value = '';
+                document.getElementById('phoneNumber').value = '';
+                document.getElementById('emailID').value = '';
+                document.getElementById('department').value = '';
+                document.getElementById('information').value = '';
+                document.getElementById('response').value = '';
+                document.getElementById('resolution').value = '';
+                document.getElementById('callNotes').innerHTML= '';
+            };
+
+            function copyCacheNotes(notesID) {
+                var r = document.createRange();
+                r.selectNode(document.getElementById(notesID));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(r);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+            };
+
+            function cacheNotes() {
+                let callNotes = document.getElementById('callNotes').innerHTML;
+                var date = new Date();
+                var time = date.toLocaleTimeString();
+                newCall = '<div class="container" id="cacheEntry'+ cacheVariable+'">'
+                                +'<tr>'
+                                    +'<div style="float:left;width:100px;padding-bottom:15px">'
+                                        +'<span id="cacheEntryTime'+cacheVariable+'" style="font-family:sans-serif;">'+time+'</span>'
+                                        +'<button id="callLogCopyButton" onclick="copyCacheNotes('+ "'cacheNotes" +cacheVariable+"')" +'" style="width:50px; height:40px;">'
+                                            +'<span style="font-size:28px;">📄</span>'
+                                        +'</button>'
+                                        +'<span id="btn" style="font-family:sans-serif; color:red; padding:4px" onclick="var selfObj = document.getElementById('+"'cacheEntry"+cacheVariable+"'"+');selfObj.remove();">'+'(remove)'
+                                        +'</span>'
+                                    +'</div>'
+                                    +'<div id="cacheNotes'+cacheVariable+'" type="input" style="text-align:justify;">'+ callNotes  +'</div>'
+                                +'</tr>'
+                            +'</div>';
+                document.getElementById('call-log-box').innerHTML += newCall;
+                cacheVariable += 1; 
+            };
+
+            function clearHistory() {
+              var r = confirm("Do you want to clear Recent Call history?");
+              if (r == true) {
+                document.getElementById('call-log-box').innerHTML = '';
+                cacheVariable = 0;
+              };                
+            };
+
+            // Code based on example from codegrepper.com
+            function downloadHistory() {
+                let today = new Date().toISOString().slice(0, 10)
+                var filename = 'sssihms-ait-call-log-'+today+'.txt'
+                var textToSave = '# # #           SSSIHMS-AIT CALL LOG HISTORY           # # # \n'
+                                +'                      Date:'+today+'\n'
+                                +'-------------------------------------------------------------\n'+'\n';
+                for (let i = 0; i < cacheVariable; i++) {
+                    try{    
+                        var timeObj = document.getElementById('cacheEntryTime'+i).innerHTML;
+                        var textObj = document.getElementById('cacheNotes'+i).innerHTML;
+                        // textToSave += '#'+(i+1)+'\n';
+                        textToSave += 'call-note time: '+timeObj+'\n'+textObj+'\n'+'\n';
+                    }
+                    catch{}    
+                };
+                textToSave +=    '---------------------------- THE END ------------------------\n';
+                var element = document.createElement('a');            
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textToSave));
+                element.setAttribute('download', filename);
+                element.setAttribute('target', '_blank' );
+                element.click();                 
+                element.style.display = 'none';
+                document.body.appendChild(element);
+              };
+            
+        </script>   
+
+    </head>
+
+    <body>
+        <div style="background-color: floralwhite; padding-top: 20px; padding-bottom: 10px;" align="center"><text style="font-size: 22px;">SSSIHMS-AIT</text></div>
+        <div class="flex-container">
+            <tr>
+                <div id="info-form-box">
+                    <div align="center"><h4 style="margin-top: 15px; margin-bottom: 15px;">Information Form</h4 ></div>
+                    <div class="grid-container">
+                        <div class="grid-item"><label>Language</label></div>
+                        <div class="grid-item">
+                            <div class="autocomplete"><input style="width:130px;" id="language" onchange="update('language', language)" type="text" placeholder="Language"></div>
+                            <script>
+                                var langs = ['Assamese','Bengali', 'English', 'Gujarati', 'Hindi', 'Kannada', 'Kashmiri', 'Malayalam', 'Marathi', 'Odiya', 'Tamil', 'Telugu'];
+                                autocomplete(document.getElementById('language'),langs);
+                            </script>
+<!--                             <datalist id="langs">        
+                                <option value="none" selected disabled>select</option>
+                                <option value="Assamese">Assamese</option>
+                                <option value="Bengali">Bengali</option>
+                                <option value="English">English</option>
+                                <option value="Gujarati">Gujarati</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Kannada">Kannada</option>
+                                <option value="Telugu">Telugu</option>
+                                <option value="Kashmiri">Kashmiri</option>
+                                <option value="Malayalam">Malayalam</option>
+                                <option value="Marathi">Marathi</option>
+                                <option value="Odiya">Odiya</option>
+                                <option value="Tamil">Tamil</option>
+                            </datalist>
+ -->                        </div>
+                        <div class="grid-item"><label><strong>FROM</strong></label></div>
+                        <div class="grid-item">
+                            <select class="drop-down" style="margin-right:10px ; "id="FROM1" onchange="update('FROM1', FROM1)">
+                                <option value="none" selected disabled hidden>Caller</option>
+                                <option value="Attendant">Attendant</option>       
+                                <option value="Patient">Patient</option>        
+                            </select>
+                            <select class="drop-down" id="FROM2" onchange="update('FROM2', FROM2)">
+                                <option value="none" selected disabled hidden>Patient type</option>
+                                <option value="New">New</option>
+                                <option value="Revisit">Revisit</option>
+                            </select>
+                        </div>
+                        <div class="grid-item"><label>Patient's Name</label></div>
+                        <div class="grid-item"><input id="patientName" onchange="update('FROM2', FROM2)"style="width: 250px"></div>
+                        <div class="grid-item"><label>Age</label></div>
+                        <div class="grid-item"><input id="age" onchange="update('age', age)"style="width: 100px" ></div>
+                        <div class="grid-item"><label>Gender</label></div>
+                        <div class="grid-item">
+                            <select class="drop-down" id="gender" onchange="update('gender', gender)">
+                                <option value="none" selected disabled hidden>Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="grid-item"><label>Attendant Name</label></div>
+                        <div class="grid-item"><input id="attender" onchange="update('attender', attender)" style="width: 250px"></div>
+                        <div class="grid-item"><label>Relation</label></div>
+                        <div class="grid-item"><input id="relation" onchange="update('relation', relation)"style="width: 150px"></div>
+                        <div class="grid-item"><label>Hospital ID</label></div>
+                        <div class="grid-item"><input id="hospitalID" onchange="update('hospitalID', hospitalID)" style="width: 150px"></div>
+                        <div class="grid-item"><label>SHD ID</label></div>
+                        <div class="grid-item"><input id="SHDID" onchange="update('SHDID', SHDID)"style="width: 150px"></div>
+                        <div class="grid-item"><label>Place</label></div>
+                        <div class="grid-item"><input id="place" onchange="update('place', place)"></div>
+                        <div class="grid-item"><label>Phone Number</label></div>
+                        <div class="grid-item"><input id="phoneNumber" onchange="update('phoneNumber', phoneNumber)" style="width: 150px"></div>
+                        <div class="grid-item"><label>email id</label></div>
+                        <div class="grid-item"><input id="emailID" onchange="update('emailID', emailID)" style="width: 250px"></div>
+                        <div class="grid-item"><label><strong>DEPARTMENT</strong></label></div>
+                        <div class="grid-item">
+                            <div class="autocomplete"><input id="department" onchange="update('department',department)" type="text" placeholder="Department"></div>
+                            <script>
+                                var departments = ['Cardio', 'Neurosurgery', 'Neurology', 'OBG', 'ENT', 'Ortho', 'CTVS', 'Dental', 'Pediatrics', 'General Medicine', 'General Surgery', 'Opthamology'];
+                                autocomplete(document.getElementById('department'), departments);
+                            </script>
+                                <!-- <option value="none" selected disabled>select</option>
+                                <option value="Cardio">Cardio</option>
+                                <option value="Neurosurgery">Neurosurgery</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="OBG">OBG</option>
+                                <option value="ENT">ENT</option>
+                                <option value="Ortho">Ortho</option>
+                                <option value="CTVS">CTVS</option>
+                                <option value="Dental">Dental</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="General Medicine">General Medicine</option>
+                                <option value="General Surgery">General Surgery</option> -->
+                            </select>
+                        </div>
+                        <div class="grid-item"><label>Information</label></div>
+                        <div class="grid-item">
+                            <textarea id="information" onchange="update('information', information)" style="width:340px;height: 110px ;border-radius: 3px; border-color: grey;border-style:solid; border-width: 1px;"></textarea>
+                        </div>
+                        <div class="grid-item"><label><strong>RESPONSE</strong></label></div>
+                        <div class="grid-item">
+                            <textarea id="response" onchange="update('response', response)" style="width:340px;height: 70px ;border-radius: 3px; border-color: grey;border-style:solid; border-width: 1px;" value= ''></textarea>
+                        </div>
+                        <div class="grid-item"><label><strong>RESOLUTION</strong></label></div>
+                        <div class="grid-item">
+                            <div class="autocomplete"><input type="text" id="resolution" onchange="update('resolution', resolution)" placeholder="Resolution status"></div>
+                            <script>
+                                var resolutions = ['Await Hospital Response', 'Call back', 'Closed', 'Enquiry', 'Appointment', 'Language Transfer', 'Link sent', 'Link to be sent'];
+                                autocomplete(document.getElementById('resolution'),resolutions);
+                            </script>
+                                <!-- <option value="none" selected disabled>select</option>
+                                <option value="Await Hospital Response"> Await Hospital Response</option>
+                                <option value="Call back"> Call back</option>
+                                <option value="Closed"> Closed</option>
+                                <option value="Enquiry Appointment"> Enquiry Appointment</option>
+                                <option value="Language Transfer"> Language Transfer</option>
+                                <option value="Link sent"> Link sent</option>
+                                <option value="Link to be sent"> Link to be sent</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div align="center">    
+                        <button onclick="createCallNotes()">Create Notes</button>
+                        <button onclick="clearEntries()">Clear Entry</button>
+                    </div>                          
+                </div>
+                <div id="call-notes-box" >
+                    <div align="center">
+                        <h4 id='call-notes-label' style="margin-top: 10px; margin-bottom: 10px; color: orange;">Call Notes</h4>
+                        <textarea id="callNotes" placeholder=" DATA IN THIS BOX MAY BE LOST ON [Clear Entry]&#10; CLICK [Cache] TO STORE NOTES BELOW&#10;&#10;&#10;Note: If notes in this box are directly edited,&#10;then [Create Notes] may not work until page reload"></textarea>
+                    </div>
+                    <div align="center">
+                        <button onclick="copyNotes()">Copy</button>
+                        <button onclick="cacheNotes()">Cache</button>
+                    </div>
+                    <h4 id='call-log-label' style="margin-top: 5px; margin-bottom: 5px; color: green; font-weight: 1000;">Recent Calls</h4>
+                    <div class="container" id="call-log-box">
+                    </div>
+                    <div align="center>">
+                        <button style="border-radius: 5px;margin: 5px; width: 150px; height: 35px; margin-right: 25px;" onclick="downloadHistory()">Download History</button>
+                        <button style="border-radius: 5px;margin: 5px; width: 150px; height: 35px;" onclick="clearHistory()">Clear History</button>
+                    </div>   
+                </div>
+                
+            </tr>
+            <br />
+        </div>
+    </body>
+    <footer>
+        <script type="text/javascript">
+            window.addEventListener('beforeunload', function (event) {
+                event.preventDefault();
+                event.returnValue = 'ok';
+                return "Are you sure you want leave?";
+            });
+
+
+        </script>
+    </footer>
+
+</html>

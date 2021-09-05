@@ -1,0 +1,200 @@
+html {
+  margin: auto;
+  font-family: sans-serif;
+  background-color: floralwhite;
+}
+
+body {
+  margin: auto;
+  max-width: 1000px;
+  background-color: white;
+}
+
+button {
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 15px;
+  width: 100px;
+  height: 35px;
+  border-width: 0.5px;
+  background-color: turquoise;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 0.1px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:hover {
+  background-color: darkblue;
+  color: white;
+}
+
+button:active {
+  background-color: lightgrey;
+  box-shadow: 0 2px lightgrey;
+  transform: translateY(1.5px);
+  height: 30px;
+  width: 95px;
+}
+
+#btn {
+  border-radius: 5px;
+}
+#btn:hover {
+  background-color: lightgrey;
+  text-decoration: underline;
+}
+
+#btn:active {
+  text-decoration: none;
+}
+
+input,
+select {
+  height: 27px;
+}
+
+select {
+  font-size: 14px;
+  background-color: #f1f1f1;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+select:focus {
+  border: 2px solid blue;
+  border-radius: 3px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-row-gap: 7.5px;
+  grid-column-gap: 30px;
+}
+
+.text-small {
+  font-size: 0.9rem;
+}
+
+.flex-container {
+  display: flex;
+  height: 820px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border-radius: 10px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+.container {
+  border: 2px solid #dedede;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 5px;
+  min-height: 105px;
+}
+
+#info-form-box {
+  text-align: justify;
+  padding-right: 20px;
+  padding-left: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scroll-behavior: auto;
+}
+
+#call-notes-label:hover {
+  cursor: default;
+}
+
+#call-notes-box {
+  padding: 10px;
+}
+
+#callNotes {
+  padding: 5px;
+  font-size: 15px;
+  width: 440px;
+  height: 210px;
+  resize: none;
+  scrollbar-width: thin;
+  border-radius: 3px;
+  border: 2px solid red;
+  background-color: rgb(255, 240, 211);
+}
+
+#call-log-label:hover {
+  cursor: default;
+}
+
+#call-log-box {
+  width: 420px;
+  height: 370px;
+  border: 5px double green;
+  border-radius: 5px;
+  background-color: rgb(242, 255, 242);
+  padding-left: 10px;
+  padding-right: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 10px 0;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+textarea {
+  font-size: 17px;
+}
+textarea:active {
+  background-color: rgb(245, 245, 245);
+  border-color: lightblue;
+}
+
+input {
+  background-color: #f1f1f1;
+  border: 1px solid transparent;
+  font-size: 17px;
+  border-radius: 3px;
+}
+input[type="text"] {
+  background-color: rgb(243, 243, 243);
+  font-size: 17px;
+  padding: 0 0 0 5px;
+  width: 100%;
+}
+input[type="submit"] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
