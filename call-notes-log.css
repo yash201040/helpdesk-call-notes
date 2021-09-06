@@ -198,3 +198,13 @@ input[type="submit"] {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+.cacheicon:hover {
+  cursor: default;
+}
+
+.removecache:hover {
+  cursor: pointer;
+  background-color: crimson;
+  color: white;
+}
